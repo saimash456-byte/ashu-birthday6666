@@ -1,34 +1,112 @@
-💌 Final Closing Scene (Ultimate Romantic Ending)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Emergency Case - Patient Saim</title>
+    <style>
+        :root { --red: #ff0055; --neon: #39ff14; --blue: #00d4ff; --dark: #050505; }
+        body, html { margin:0; padding:0; overflow:hidden; font-family:'Segoe UI', sans-serif; background: var(--dark); color: #fff; }
+        
+        .stage { display:none; width:100vw; height:100vh; justify-content:center; align-items:center; flex-direction:column; text-align:center; position:absolute; padding: 20px; box-sizing: border-box; }
+        .active { display:flex; animation: fadeIn 0.8s forwards; }
 
-Screen dheere dheere dark ho jaye…
-Sirf ECG line chal rahi ho…
+        /* ECG Heart Line */
+        .ecg-box { width: 300px; height: 100px; position: relative; overflow: hidden; }
+        .ecg-line { width: 100%; height: 2px; background: var(--neon); position: absolute; top: 50%; box-shadow: 0 0 15px var(--neon); animation: pulseLine 2s infinite linear; }
+        
+        /* Report Cards */
+        .report-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-left: 4px solid var(--red); padding: 20px; border-radius: 10px; text-align: left; width: 90%; max-width: 350px; margin-top: 20px; }
+        .line { font-family: monospace; font-size: 0.85rem; margin-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .label { color: var(--blue); }
 
-ECG beat:
-❤️ ASHU… ❤️ ASHU… ❤️ ASHU…
+        /* Buttons */
+        .btn { background: var(--red); color: white; border: none; padding: 15px 30px; border-radius: 50px; font-weight: bold; cursor: pointer; margin-top: 25px; box-shadow: 0 0 20px rgba(255, 0, 85, 0.4); text-transform: uppercase; letter-spacing: 1px; }
 
-Phir report ka last page open ho…
+        /* Hearts Rain */
+        .heart-rain { position: absolute; top: -10%; font-size: 20px; animation: fall linear forwards; }
 
-🧾 Final Medical Verdict
+        @keyframes pulseLine { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+        @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        
+        .typewriter { overflow: hidden; border-right: .15em solid var(--red); white-space: nowrap; margin: 0 auto; letter-spacing: .1em; animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite; }
+        @keyframes typing { from { width: 0 } to { width: 100% } }
+        @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: var(--red); } }
+    </style>
+</head>
+<body>
 
-Patient Condition: Stable in her presence
-Risk Level: Extremely high without her
-Emotional Dependency: Permanent
+    <div id="slide1" class="stage active">
+        <div class="ecg-box"><div class="ecg-line"></div></div>
+        <h2 style="color: var(--red); margin-top: 30px;">⚠️ Emergency Alert</h2>
+        <div class="report-card" style="text-align: center;">
+            <p>Patient Condition: <span style="color: var(--red);">Extremely Critical</span></p>
+            <p>Reason: <span style="color: var(--blue);">"Ashu Overdose"</span></p>
+        </div>
+        <button class="btn" onclick="nextSlide(1, 2)">👉 Doctor, Please Save Him</button>
+    </div>
 
-Thora pause…
+    <div id="slide2" class="stage">
+        <div style="background: var(--red); padding: 20px; border-radius: 50%; font-size: 50px;">👩‍⚕️</div>
+        <h2 style="color: var(--pink); margin-top: 20px;">Dr. Ashu (Future Pharm-D)</h2>
+        <p style="font-style: italic; opacity: 0.8;">Specialist in Heart & Emotion Therapy</p>
+        <button class="btn" onclick="nextSlide(2, 3)">Open Medical File 🧾</button>
+    </div>
 
-Phir bold letters me appear ho:
+    <div id="slide3" class="stage" style="overflow-y: auto; padding-top: 50px;">
+        <h3 style="color: var(--blue);">FULL DIAGNOSTIC REPORT</h3>
+        <div class="report-card">
+            <b style="color: var(--red);">❤️ Heart Scan:</b>
+            <div class="line"><span class="label">Pattern:</span> Ashu... Ashu... Ashu...</div>
+            <div class="line"><span class="label">Conclusion:</span> Permanently Registered</div>
+            
+            <b style="color: var(--blue); display:block; margin-top:15px;">🧠 Brain MRI:</b>
+            <div class="line"><span class="label">Memory:</span> 98% Occupied by Ashu</div>
+            <div class="line"><span class="label">Diagnosis:</span> Ashu Occupation Syndrome</div>
+        </div>
+        <button class="btn" onclick="nextSlide(3, 4)">View Final Words</button>
+    </div>
 
-⚠️ Critical Note from Hospital Authority:
+    <div id="slide4" class="stage">
+        <h2 style="color: var(--neon);">Suggested Treatment:</h2>
+        <div class="report-card" style="border-color: var(--neon);">
+            <p>💍 Lifetime companionship</p>
+            <p>💕 Unlimited hugs</p>
+            <p>💌 Daily love dose</p>
+        </div>
+        <p style="margin-top: 20px; font-style: italic;">“Dr. Ashu… agar aap nahi hoti, to mera dil sirf ek organ hota… aap ne ise mohabbat bana diya.”</p>
+        <button class="btn" onclick="triggerLove()">❤️ Approve Treatment</button>
+    </div>
 
-Aur neeche slow typewriter effect me:
+    <div id="slide5" class="stage">
+        <h2 style="color: var(--red);">🧾 Final Medical Verdict</h2>
+        <div class="report-card" style="text-align: center;">
+            <p class="typewriter">Case file will be closed...</p>
+            <p class="typewriter" style="animation-delay: 3s;">only if Doctor becomes Life Partner.</p>
+        </div>
+        <div style="font-size: 80px; margin-top: 20px;">❤️</div>
+        <p style="font-style: italic; opacity: 0.7;">“Dr. Ashu… ab faisla aap ke haath me hai… patient aapka hi rahega.” 💍</p>
+        <button class="btn" style="background: #fff; color: #000;" onclick="location.reload()">Restart Analysis</button>
+    </div>
 
-“Case file will be permanently closed…
-only if Doctor becomes Life Partner.” 😌
+    <script>
+        function nextSlide(c, n) {
+            document.getElementById('slide' + c).classList.remove('active');
+            document.getElementById('slide' + n).classList.add('active');
+        }
 
-ECG line heart shape bana kar freeze ho jaye ❤️
-
-Last Whisper Line (Soft Touch)
-
-“Dr. Ashu…
-ab faisla aap ke haath me hai…
-patient aapka hi rahega.” 💍
+        function triggerLove() {
+            nextSlide(4, 5);
+            for(let i=0; i<50; i++) {
+                let h = document.createElement('div');
+                h.className = 'heart-rain';
+                h.innerHTML = '❤️';
+                h.style.left = Math.random() * 100 + 'vw';
+                h.style.animationDuration = (Math.random() * 2 + 1) + 's';
+                document.body.appendChild(h);
+            }
+        }
+    </script>
+</body>
+</html>
