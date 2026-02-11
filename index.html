@@ -5,89 +5,89 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Emergency Case - Patient Saim</title>
     <style>
-        :root { --red: #ff0055; --neon: #39ff14; --blue: #00d4ff; --dark: #050505; }
+        :root { --red: #ff0055; --neon: #39ff14; --blue: #00d4ff; --dark: #050505; --pink: #ff85a1; }
         body, html { margin:0; padding:0; overflow:hidden; font-family:'Segoe UI', sans-serif; background: var(--dark); color: #fff; }
         
-        .stage { display:none; width:100vw; height:100vh; justify-content:center; align-items:center; flex-direction:column; text-align:center; position:absolute; padding: 20px; box-sizing: border-box; }
+        .stage { display:none; width:100vw; height:100vh; justify-content:center; align-items:center; flex-direction:column; text-align:center; position:absolute; padding: 25px; box-sizing: border-box; }
         .active { display:flex; animation: fadeIn 0.8s forwards; }
 
-        /* ECG Heart Line */
-        .ecg-box { width: 300px; height: 100px; position: relative; overflow: hidden; }
-        .ecg-line { width: 100%; height: 2px; background: var(--neon); position: absolute; top: 50%; box-shadow: 0 0 15px var(--neon); animation: pulseLine 2s infinite linear; }
-        
-        /* Report Cards */
-        .report-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-left: 4px solid var(--red); padding: 20px; border-radius: 10px; text-align: left; width: 90%; max-width: 350px; margin-top: 20px; }
-        .line { font-family: monospace; font-size: 0.85rem; margin-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05); }
-        .label { color: var(--blue); }
+        .scan-container { width: 220px; height: 220px; border: 2px solid var(--blue); border-radius: 50%; display: flex; justify-content: center; align-items: center; position: relative; cursor: pointer; background: rgba(0, 212, 255, 0.05); transition: 0.3s; }
+        .scan-container:hover { box-shadow: 0 0 20px var(--blue); }
+        .scanner-line { width: 100%; height: 2px; background: var(--neon); position: absolute; top: 0; animation: scanMove 2s infinite linear; box-shadow: 0 0 10px var(--neon); }
 
-        /* Buttons */
-        .btn { background: var(--red); color: white; border: none; padding: 15px 30px; border-radius: 50px; font-weight: bold; cursor: pointer; margin-top: 25px; box-shadow: 0 0 20px rgba(255, 0, 85, 0.4); text-transform: uppercase; letter-spacing: 1px; }
+        .report-card { background: rgba(255,255,255,0.05); border-left: 4px solid var(--red); padding: 15px; border-radius: 10px; text-align: left; width: 100%; max-width: 320px; margin-top: 20px; font-family: monospace; }
+        .btn { background: var(--red); color: white; border: none; padding: 15px 30px; border-radius: 50px; font-weight: bold; cursor: pointer; margin-top: 25px; box-shadow: 0 0 15px var(--red); text-transform: uppercase; }
 
-        /* Hearts Rain */
-        .heart-rain { position: absolute; top: -10%; font-size: 20px; animation: fall linear forwards; }
-
-        @keyframes pulseLine { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
-        @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
+        @keyframes scanMove { 0% { top: 0%; } 100% { top: 100%; } }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        
-        .typewriter { overflow: hidden; border-right: .15em solid var(--red); white-space: nowrap; margin: 0 auto; letter-spacing: .1em; animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite; }
-        @keyframes typing { from { width: 0 } to { width: 100% } }
-        @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: var(--red); } }
+        @keyframes beat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
     </style>
 </head>
 <body>
 
     <div id="slide1" class="stage active">
-        <div class="ecg-box"><div class="ecg-line"></div></div>
-        <h2 style="color: var(--red); margin-top: 30px;">⚠️ Emergency Alert</h2>
-        <div class="report-card" style="text-align: center;">
-            <p>Patient Condition: <span style="color: var(--red);">Extremely Critical</span></p>
-            <p>Reason: <span style="color: var(--blue);">"Ashu Overdose"</span></p>
-        </div>
+        <h2 style="color: var(--red);">⚠️ EMERGENCY ALERT</h2>
+        <p>Patient Name: <b>Saim</b></p>
+        <p>Condition: <b>Extremely Critical</b></p>
         <button class="btn" onclick="nextSlide(1, 2)">👉 Doctor, Please Save Him</button>
     </div>
 
     <div id="slide2" class="stage">
-        <div style="background: var(--red); padding: 20px; border-radius: 50%; font-size: 50px;">👩‍⚕️</div>
-        <h2 style="color: var(--pink); margin-top: 20px;">Dr. Ashu (Future Pharm-D)</h2>
-        <p style="font-style: italic; opacity: 0.8;">Specialist in Heart & Emotion Therapy</p>
-        <button class="btn" onclick="nextSlide(2, 3)">Open Medical File 🧾</button>
+        <h3 style="color: var(--blue);">STEP 1: CARDIAC SCAN</h3>
+        <div class="scan-container" onclick="showHeartReport()">
+            <div class="scanner-line"></div>
+            <div style="font-size: 80px; animation: beat 0.8s infinite;">❤️</div>
+        </div>
+        <p id="h-msg" style="margin-top: 15px; opacity: 0.7;">Click Heart to Analyze Beats...</p>
+        <div id="h-report" class="report-card" style="display:none;">
+            <div>> BPM: Ashu... Ashu...</div>
+            <div>> Rhythm: 100% Love Pattern</div>
+            <div>> Result: Heart belongs to Ashu</div>
+        </div>
+        <button id="h-btn" class="btn" style="display:none;" onclick="nextSlide(2, 3)">Proceed to Brain Scan</button>
     </div>
 
-    <div id="slide3" class="stage" style="overflow-y: auto; padding-top: 50px;">
-        <h3 style="color: var(--blue);">FULL DIAGNOSTIC REPORT</h3>
-        <div class="report-card">
-            <b style="color: var(--red);">❤️ Heart Scan:</b>
-            <div class="line"><span class="label">Pattern:</span> Ashu... Ashu... Ashu...</div>
-            <div class="line"><span class="label">Conclusion:</span> Permanently Registered</div>
-            
-            <b style="color: var(--blue); display:block; margin-top:15px;">🧠 Brain MRI:</b>
-            <div class="line"><span class="label">Memory:</span> 98% Occupied by Ashu</div>
-            <div class="line"><span class="label">Diagnosis:</span> Ashu Occupation Syndrome</div>
+    <div id="slide3" class="stage">
+        <h3 style="color: var(--blue);">STEP 2: NEURO SCAN</h3>
+        <div class="scan-container" onclick="showBrainReport()" style="border-color: var(--neon);">
+            <div class="scanner-line"></div>
+            <div style="font-size: 70px;">🧠</div>
         </div>
-        <button class="btn" onclick="nextSlide(3, 4)">View Final Words</button>
+        <p id="b-msg" style="margin-top: 15px; opacity: 0.7;">Click Brain to Analyze Thoughts...</p>
+        <div id="b-report" class="report-card" style="display:none; border-left-color: var(--neon);">
+            <div>> Memory: Ashu Only</div>
+            <div>> Thought Index: Ashu x Infinity</div>
+            <div>> Diagnosis: Ashu Occupation</div>
+        </div>
+        <button id="b-btn" class="btn" style="display:none;" onclick="nextSlide(3, 4)">View Final Verdict</button>
     </div>
 
     <div id="slide4" class="stage">
-        <h2 style="color: var(--neon);">Suggested Treatment:</h2>
-        <div class="report-card" style="border-color: var(--neon);">
-            <p>💍 Lifetime companionship</p>
-            <p>💕 Unlimited hugs</p>
-            <p>💌 Daily love dose</p>
+        <h2 style="color: var(--pink);">Final Medical Verdict</h2>
+        <div class="report-card" style="text-align: center; border-right: 4px solid var(--red);">
+            <p>Saim ke Dil o Dimag mein bas yahi hai...</p>
+            <p style="font-size: 1.5rem; color: var(--blue);">Ashu... Ashu... aur sirf</p>
+            <p style="font-size: 2rem; color: var(--red); font-weight: bold;">ASHU! ❤️</p>
         </div>
-        <p style="margin-top: 20px; font-style: italic;">“Dr. Ashu… agar aap nahi hoti, to mera dil sirf ek organ hota… aap ne ise mohabbat bana diya.”</p>
-        <button class="btn" onclick="triggerLove()">❤️ Approve Treatment</button>
+        <button class="btn" onclick="nextSlide(4, 5)">View Birthday Countdown</button>
     </div>
 
     <div id="slide5" class="stage">
-        <h2 style="color: var(--red);">🧾 Final Medical Verdict</h2>
-        <div class="report-card" style="text-align: center;">
-            <p class="typewriter">Case file will be closed...</p>
-            <p class="typewriter" style="animation-delay: 3s;">only if Doctor becomes Life Partner.</p>
+        <div style="background: var(--red); padding: 30px; border-radius: 50%; box-shadow: 0 0 30px var(--red);">
+            <h1 style="font-size: 5rem; margin: 0;">06</h1>
+            <p style="margin: 0; font-weight: bold;">DAYS LEFT</p>
         </div>
-        <div style="font-size: 80px; margin-top: 20px;">❤️</div>
-        <p style="font-style: italic; opacity: 0.7;">“Dr. Ashu… ab faisla aap ke haath me hai… patient aapka hi rahega.” 💍</p>
-        <button class="btn" style="background: #fff; color: #000;" onclick="location.reload()">Restart Analysis</button>
+        <h2 style="color: var(--pink); margin-top: 30px;">Happy Birthday In Advance <br> Dr. Ashu! 🎂</h2>
+        <div class="report-card" style="background: transparent; border: none; text-align: center;">
+            <p style="font-style: italic; line-height: 1.6;">
+                "6 din pehle hi ye dil aapke liye saj gaya hai. <br>
+                Meri poori dunya, meri shifa, meri khushi... <br>
+                sab kuch aap hi hain. Main poora ka poora <br>
+                sirf aapka hoon. I love you meri kul kainat!"
+            </p>
+        </div>
+        <p style="color: var(--blue); font-weight: bold; margin-top: 15px;">Mera Ras Malai ❤️</p>
+        <button class="btn" style="background: #fff; color: #000;" onclick="location.reload()">Re-Check Patient Saim</button>
     </div>
 
     <script>
@@ -96,16 +96,18 @@
             document.getElementById('slide' + n).classList.add('active');
         }
 
-        function triggerLove() {
-            nextSlide(4, 5);
-            for(let i=0; i<50; i++) {
-                let h = document.createElement('div');
-                h.className = 'heart-rain';
-                h.innerHTML = '❤️';
-                h.style.left = Math.random() * 100 + 'vw';
-                h.style.animationDuration = (Math.random() * 2 + 1) + 's';
-                document.body.appendChild(h);
-            }
+        function showHeartReport() {
+            document.getElementById('h-msg').style.display = 'none';
+            document.getElementById('h-report').style.display = 'block';
+            document.getElementById('h-btn').style.display = 'block';
+            if (navigator.vibrate) navigator.vibrate(100);
+        }
+
+        function showBrainReport() {
+            document.getElementById('b-msg').style.display = 'none';
+            document.getElementById('b-report').style.display = 'block';
+            document.getElementById('b-btn').style.display = 'block';
+            if (navigator.vibrate) navigator.vibrate(100);
         }
     </script>
 </body>
